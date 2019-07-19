@@ -1,0 +1,28 @@
+# Activates URL rewriting (like myproject.com/controller/action/1/2/3)
+RewriteEngine on
+
+
+# When using the script within a sub-folder, put this path here, like /mysubfolder/
+# If your app is in the root of your web folder, then leave it commented out
+RewriteBase /
+
+# General rewrite rules
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.+)$ index.php [QSA,L]
+#RewriteRule ^public/song/(.*)\.mp3$ http://mvc.tj/listensong?s=$1
+
+#Запрет листинга каталогов: -запрет, +разрешение
+Options -Indexes
+
+# Установка кодировки сервера
+AddDefaultCharset utf-8
+
+
+#Страницы ошибок
+ErrorDocument 404 /App/Views/error404.php
+ErrorDocument 403 /App/Views/error403.php
+
+#Переопределение индексного файла
+#DirectoryIndex setting.php
